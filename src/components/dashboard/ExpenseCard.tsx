@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { ArrowUpRight } from 'react-feather'
 import { formatCurrency } from '../../utils'
 
 interface ExpenseCardProps {
@@ -34,15 +35,7 @@ export function ExpenseCard({ expenses }: ExpenseCardProps) {
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-label-medium font-semibold text-neutral-500">Despesas</h3>
         <div className="w-10 h-10 bg-red-600 bg-opacity-10 rounded-full flex items-center justify-center">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M15 5L5 15M5 15H12M5 15V8"
-              stroke="#e61e32"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <ArrowUpRight size={20} className="text-red-600" strokeWidth={2} />
         </div>
       </div>
       <p className="text-heading-small font-bold text-secondary-900">{formatCurrency(displayValue)}</p>

@@ -1,4 +1,13 @@
 import { Link, useLocation } from 'react-router-dom'
+import { 
+  Home, 
+  CreditCard, 
+  Repeat, 
+  Target, 
+  User, 
+  X, 
+  LogOut 
+} from 'react-feather'
 import { ROUTES } from '../../constants'
 
 interface MenuDropdownProps {
@@ -7,40 +16,18 @@ interface MenuDropdownProps {
   activeRoute?: string
 }
 
-// Componente de ícone SVG para navegação (mesmo da Sidebar)
-function NavIcon({ icon, isActive }: { icon: string; isActive: boolean }) {
-  const iconColor = isActive ? '#D7FF00' : '#060A11'
+// Componente de ícone usando Feather Icons (mesmo da Sidebar)
+// Ícone mantém a mesma cor do texto em todos os estados (secondary-900)
+function NavIcon({ icon }: { icon: string }) {
+  const iconColorClass = 'text-secondary-900'
+  const iconSize = 20
   
   const icons: Record<string, JSX.Element> = {
-    dashboard: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3 10L10 3L17 10M3 17H7V12H13V17H17" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-    cards: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="2" y="5" width="16" height="10" rx="2" stroke={iconColor} strokeWidth="1.5"/>
-        <path d="M2 9H18" stroke={iconColor} strokeWidth="1.5"/>
-        <circle cx="15" cy="12" r="1" fill={iconColor}/>
-      </svg>
-    ),
-    transactions: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3 10H17M3 10L7 6M3 10L7 14M17 10L13 6M17 10L13 14" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-    goals: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="10" cy="10" r="7" stroke={iconColor} strokeWidth="1.5"/>
-        <path d="M10 6V10L13 13" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
-    profile: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="10" cy="7" r="3" stroke={iconColor} strokeWidth="1.5"/>
-        <path d="M4 17C4 14 6.5 12 10 12C13.5 12 16 14 16 17" stroke={iconColor} strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
+    dashboard: <Home size={iconSize} className={iconColorClass} strokeWidth={1.5} />,
+    cards: <CreditCard size={iconSize} className={iconColorClass} strokeWidth={1.5} />,
+    transactions: <Repeat size={iconSize} className={iconColorClass} strokeWidth={1.5} />,
+    goals: <Target size={iconSize} className={iconColorClass} strokeWidth={1.5} />,
+    profile: <User size={iconSize} className={iconColorClass} strokeWidth={1.5} />,
   }
   
   return icons[icon] || icons.dashboard
@@ -94,9 +81,7 @@ export function MenuDropdown({ isOpen, onClose, activeRoute }: MenuDropdownProps
             className="p-2 hover:bg-neutral-300 rounded-lg transition-colors"
             aria-label="Fechar menu"
           >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 5L5 15M5 5L15 15" stroke="#060A11" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <X size={20} className="text-secondary-900" strokeWidth={2} />
           </button>
         </div>
 
@@ -113,17 +98,17 @@ export function MenuDropdown({ isOpen, onClose, activeRoute }: MenuDropdownProps
                     className={`
                       flex items-center gap-3
                       px-4 py-3
-                      rounded-lg
-                      transition-all duration-200
+                      rounded-20
+                      transition-all duration-200 ease-in-out
                       ${
                         isActive
-                          ? 'bg-secondary-900 text-surface-500'
+                          ? 'bg-primary-500 text-secondary-900'
                           : 'text-secondary-900 hover:bg-neutral-300'
                       }
                     `}
                   >
-                    <NavIcon icon={item.icon} isActive={isActive} />
-                    <span className={`text-label-medium font-semibold ${isActive ? 'text-surface-500' : 'text-secondary-900'}`}>
+                    <NavIcon icon={item.icon} />
+                    <span className={`text-label-medium font-semibold ${isActive ? 'text-secondary-900' : 'text-secondary-900'}`}>
                       {item.label}
                     </span>
                   </Link>
@@ -139,9 +124,7 @@ export function MenuDropdown({ isOpen, onClose, activeRoute }: MenuDropdownProps
             onClick={onClose}
             className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-600 text-surface-500 rounded-lg hover:bg-red-700 transition-colors"
           >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13 6L17 10M17 10L13 14M17 10H7M7 3H4C3.44772 3 3 3.44772 3 4V16C3 16.5523 3.44772 17 4 17H7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <LogOut size={20} className="text-surface-500" strokeWidth={1.5} />
             <span className="text-label-medium font-semibold">Sair</span>
           </button>
         </div>

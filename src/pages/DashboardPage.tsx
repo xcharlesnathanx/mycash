@@ -1,4 +1,17 @@
 import { useMemo } from 'react'
+import { 
+  Home, 
+  Coffee, 
+  ShoppingCart, 
+  Activity, 
+  ChevronLeft, 
+  ChevronRight, 
+  Plus, 
+  Check, 
+  ArrowUpRight,
+  ArrowRight,
+  CreditCard
+} from 'react-feather'
 import { Card } from '../components/ui/Card'
 import { CircularProgress } from '../components/ui/CircularProgress'
 import { BalanceCard } from '../components/dashboard/BalanceCard'
@@ -60,11 +73,18 @@ export function DashboardPage() {
           { name: 'Mercado', percentage: 5, value: 1500 },
           { name: 'Academia', percentage: 3, value: 120 },
         ].map((category, index) => {
-          const icons = ['🏠', '🍽️', '🛒', '💪']
+          const iconComponents = [
+            <Home key="home" size={24} className="text-secondary-900" strokeWidth={1.5} />,
+            <Coffee key="coffee" size={24} className="text-secondary-900" strokeWidth={1.5} />,
+            <ShoppingCart key="cart" size={24} className="text-secondary-900" strokeWidth={1.5} />,
+            <Activity key="activity" size={24} className="text-secondary-900" strokeWidth={1.5} />,
+          ]
           return (
             <Card key={category.name} padding="sm">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-2xl">{icons[index] || '📦'}</span>
+                <div className="flex items-center justify-center w-10 h-10">
+                  {iconComponents[index] || iconComponents[0]}
+                </div>
                 <CircularProgress percentage={category.percentage} size={48} />
               </div>
               <h3 className="text-label-medium font-semibold text-secondary-900 mb-1">
@@ -85,9 +105,15 @@ export function DashboardPage() {
             Cards & contas
           </h2>
           <div className="flex items-center gap-2">
-            <button className="p-2 hover:bg-neutral-300 rounded-lg">←</button>
-            <button className="p-2 hover:bg-neutral-300 rounded-lg">→</button>
-            <button className="p-2 hover:bg-neutral-300 rounded-lg">+</button>
+            <button className="p-2 hover:bg-neutral-300 rounded-lg transition-colors" aria-label="Anterior">
+              <ChevronLeft size={16} className="text-secondary-900" strokeWidth={2} />
+            </button>
+            <button className="p-2 hover:bg-neutral-300 rounded-lg transition-colors" aria-label="Próximo">
+              <ChevronRight size={16} className="text-secondary-900" strokeWidth={2} />
+            </button>
+            <button className="p-2 hover:bg-neutral-300 rounded-lg transition-colors" aria-label="Adicionar">
+              <Plus size={16} className="text-secondary-900" strokeWidth={2} />
+            </button>
           </div>
         </div>
         <div className="space-y-3">
@@ -102,7 +128,7 @@ export function DashboardPage() {
             >
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-primary-500 flex items-center justify-center">
-                  <span className="text-label-small">🏦</span>
+                  <CreditCard size={20} className="text-secondary-900" strokeWidth={1.5} />
                 </div>
                 <div>
                   <p className="text-label-medium font-semibold text-secondary-900">
@@ -117,7 +143,7 @@ export function DashboardPage() {
                 <p className="text-label-medium font-semibold text-secondary-900">
                   R$ {card.balance.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                 </p>
-                <span className="text-secondary-900">→</span>
+                <ArrowRight size={16} className="text-secondary-900" strokeWidth={2} />
               </div>
             </div>
           ))}
@@ -164,7 +190,7 @@ export function DashboardPage() {
             >
               <div className="flex items-center gap-3">
                 <div className="w-5 h-5 rounded border-2 border-green-600 flex items-center justify-center">
-                  <span className="text-green-600 text-xs">✓</span>
+                  <Check size={12} className="text-green-600" strokeWidth={3} />
                 </div>
                 <div>
                   <p className="text-label-medium font-semibold text-secondary-900">
@@ -251,7 +277,7 @@ export function DashboardPage() {
                   </td>
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-2">
-                      <span className="text-red-600">↑</span>
+                      <ArrowUpRight size={16} className="text-red-600" strokeWidth={2} />
                       <span className="text-paragraph-small text-secondary-900">
                         {transaction.description}
                       </span>
@@ -279,23 +305,23 @@ export function DashboardPage() {
             Mostrando 1 a 5 de 17
           </p>
           <div className="flex items-center gap-2">
-            <button className="px-3 py-1 border border-neutral-300 rounded-lg text-paragraph-small hover:bg-neutral-300">
-              ←
+            <button className="px-3 py-1 border border-neutral-300 rounded-lg text-paragraph-small hover:bg-neutral-300 transition-colors flex items-center justify-center" aria-label="Página anterior">
+              <ChevronLeft size={16} className="text-secondary-900" strokeWidth={2} />
             </button>
             {[1, 2, 3, 4, 5].map((page) => (
               <button
                 key={page}
-                className={`px-3 py-1 border rounded-lg text-paragraph-small ${
+                className={`px-3 py-1 border rounded-lg text-paragraph-small transition-colors ${
                   page === 1
                     ? 'bg-primary-500 border-primary-500 text-secondary-900'
-                    : 'border-neutral-300 hover:bg-neutral-300'
+                    : 'border-neutral-300 hover:bg-neutral-300 text-secondary-900'
                 }`}
               >
                 {page}
               </button>
             ))}
-            <button className="px-3 py-1 border border-neutral-300 rounded-lg text-paragraph-small hover:bg-neutral-300">
-              →
+            <button className="px-3 py-1 border border-neutral-300 rounded-lg text-paragraph-small hover:bg-neutral-300 transition-colors flex items-center justify-center" aria-label="Próxima página">
+              <ChevronRight size={16} className="text-secondary-900" strokeWidth={2} />
             </button>
           </div>
         </div>

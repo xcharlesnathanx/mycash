@@ -33,11 +33,28 @@ export function Avatar({ src, alt, name, size = 'md', className = '' }: AvatarPr
         font-semibold
         text-label-small
         overflow-hidden
+        relative
+        shrink-0
         ${className}
       `}
     >
       {src ? (
-        <img src={src} alt={alt || name} className="w-full h-full object-cover" />
+        <img 
+          src={src} 
+          alt={alt || name} 
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            // Fallback para iniciais se a imagem falhar
+            const target = e.target as HTMLImageElement
+            target.style.display = 'none'
+            const parent = target.parentElement
+            if (parent && name) {
+              const span = document.createElement('span')
+              span.textContent = getInitials(name)
+              parent.appendChild(span)
+            }
+          }}
+        />
       ) : (
         <span>{name ? getInitials(name) : '?'}</span>
       )}

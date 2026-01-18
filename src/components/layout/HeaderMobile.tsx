@@ -1,3 +1,4 @@
+import { Menu } from 'react-feather'
 import { Avatar } from '../ui/Avatar'
 
 interface HeaderMobileProps {
@@ -14,9 +15,7 @@ export function HeaderMobile({ onMenuClick }: HeaderMobileProps) {
             className="p-2 hover:bg-neutral-300 rounded-lg transition-colors"
             aria-label="Abrir menu"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 12H21M3 6H21M3 18H21" stroke="#060A11" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <Menu size={24} className="text-secondary-900" strokeWidth={2} />
           </button>
           <h1 className="text-heading-xsmall text-secondary-900 font-bold">
             mycash+

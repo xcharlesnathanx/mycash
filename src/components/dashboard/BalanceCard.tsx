@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { TrendingUp } from 'react-feather'
 import { formatCurrency } from '../../utils'
 
 interface BalanceCardProps {
@@ -45,15 +46,7 @@ export function BalanceCard({ balance, growthPercentage }: BalanceCardProps) {
 
       {/* Badge de crescimento */}
       <div className="flex items-center gap-2 bg-surface-500 bg-opacity-20 rounded-full px-3 py-1.5 w-fit relative z-10">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M8 3V13M8 13L12 9M8 13L4 9"
-            stroke="#D7FF00"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <TrendingUp size={16} className="text-primary-500" strokeWidth={2} />
         <span className="text-label-xsmall font-semibold text-primary-500">
           +{growthPercentage}% esse mês
         </span>
